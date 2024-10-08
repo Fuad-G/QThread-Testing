@@ -10,13 +10,14 @@ class Worker : public QObject
 
 public:
 
-    Worker() {
+    Worker() : m_workerSubclass2(this) {
         m_workerSubclass = new WorkerSubclass(this);
     }
 
-    WorkerSubclass * m_workerSubclass;
-
-    WorkerSubclass m_workerSubclass2;
+    // Public for testing
+    WorkerSubclass * m_workerSubclass; // on heap
+    WorkerSubclass m_workerSubclass2; // Initialized in initializer list
+    WorkerSubclass m_workerSubclass3; // Default constructed
 
 
 public slots:
@@ -26,7 +27,6 @@ public slots:
 
 signals:
     void resultReady(const QString &result);
-
 
 };
 
